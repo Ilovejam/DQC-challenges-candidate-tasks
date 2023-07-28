@@ -1,10 +1,6 @@
 from pprint import pprint
 from data_class import DataClass
 import argparse
-import json
-
-CSV_PATH = "data/data.csv"
-
 
 def main():
     parser = argparse.ArgumentParser(description="Simple tool for checking csv files.")

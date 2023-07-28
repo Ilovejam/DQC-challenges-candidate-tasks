@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { initializeIcons } from "@fluentui/react/lib/Icons";
 
+initializeIcons(); // Initialize Fluent UI icons
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

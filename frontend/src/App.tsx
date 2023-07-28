@@ -1,23 +1,32 @@
-import { FontIcon, initializeIcons, Stack, Text } from "@fluentui/react";
+import { FontIcon, initializeIcons, Stack } from "@fluentui/react";
 import { SurveyFreeText } from "./components/surveys/survey-free-text";
+import surveyResults from "./data/survey_results"; // importing JSON data
 initializeIcons();
 
 function App() {
-  const happinessScore = 73;
+  // Get pinion scale responses 
+  const opinionScaleResponses: number[] = surveyResults.questions
+    .filter((question: any) => question.type === "number")
+    .flatMap((question: any) => question.responses);
+
+  // Calculate Happiness score'u  (get averange of opinion scale responses)
+  const happinessScore: number =
+    opinionScaleResponses.reduce((sum, response) => sum + response, 0) /
+    opinionScaleResponses.length;
 
   return (
     <Stack style={{ margin: 20 }}>
       <h1>
         <FontIcon iconName="ClipboardList" style={{ marginRight: "5px" }} />
-        Insert survey title here
+        {surveyResults.survey_title} {/* Survey starts */}
       </h1>
 
       <h1 data-testid="happinessScore">
         <FontIcon iconName="ChatBot" style={{ marginRight: "5px" }} />
-        {happinessScore} / 100
+        {Math.round(happinessScore)} / 100
       </h1>
       <Stack>
-        <SurveyFreeText />
+        <SurveyFreeText /> {/* Calling SurveyFreeText component */}
       </Stack>
     </Stack>
   );
